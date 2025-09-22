@@ -8,6 +8,4 @@ CLASS(Light)
     METHOD(Light, void, setState, ,int)
 ENDCLASS(Light)
 
-#ifndef __CLASS_H
 #include "../endclass.h"
-#endif

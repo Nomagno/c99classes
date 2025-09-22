@@ -24,6 +24,4 @@ CLASS(Rotary)
     METHOD(Rotary, void, moveWheel, ,int)
 ENDCLASS(Rotary)
 
-#ifndef __CLASS_H
 #include "../endclass.h"
-#endif

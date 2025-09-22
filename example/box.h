@@ -9,6 +9,4 @@ CLASS(Box)
     METHOD(Box, int, getValue,)
 ENDCLASS(Box)
 
-#ifndef __CLASS_H
 #include "../endclass.h"
-#endif

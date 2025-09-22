@@ -1,3 +1,4 @@
+#ifndef __CLASS_H
 // Just used to clean up after declaring a class to play nice with modularity principles.
 #undef CLASS
 #undef MEMBER
@@ -8,3 +9,4 @@
 #undef ENDCLASS
 #undef __CLASS_H
 #undef __CLASS_FILE__
+#endif
