@@ -4,6 +4,6 @@
 
 // A light that can have intensity zero (OFF) or nonzero (ON)
 CLASS(Light)
-    MEMBER(unsigned, state,, {0})
+    MEMBER(unsigned, state, {0})
     METHOD(Light, void, setState, ,int)
 ENDCLASS(Light)

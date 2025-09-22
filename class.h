@@ -26,14 +26,29 @@ void free(void *);
 // First pass, make class type
 #define CLASS(__class)\
 typedef struct __class {
-#define MEMBER(__type, __name, __type2, ...) \
-    __type __name __type2;
-#define MEMBER_CLEANUP(__type, __name, __type2, __init, ...) \
-    __type __name __type2;
+// The type must fully precede the name.
+// What goes after __name is the init expression to assign to the member in the constructor.
+// Hence, MEMBER can't be used for arrays and function pointers, use MemberC for that
+#define MEMBER(__type, __name, ...) \
+    __type __name;
+// Cleanup variant, what goes after __init is the code block that will be used for cleanup in the destructor.
+// It must reference members like self->member_name.
+#define MEMBER_CLEANUP(__type, __name, __init, ...) \
+    __type __name;
+// MemberC(ustom) has a second type field for declaring function pointers and arrays.
+// What goes after __type2 is an initialization block so it can be used to initialize arrays or anything that has custom requirements.
+// The initialization code block must reference members like self->member_name
 #define MEMBERC(__type, __name, __type2, ...) \
     __type __name __type2;
+// Cleanup variant, what goes after __init is the code block that will be used for cleanup in the destructor.
+// It must reference members like self->member_name.
 #define MEMBERC_CLEANUP(__type, __name, __type2, __init, ...) \
     __type __name __type2;
+// Declares a method, it will create a function pointer member called [__name], which will be assigned the value of the default implementation in the constructor.
+// The default implementation will be declared and named method_className_methodName, and must be implemented in the .c file.
+// __in is the input type, and what goes after __name is the output list (with implicit self).
+// If it just takes self, just leave the trailing comma: METHOD(MyClass, int, someMethodThatJustReturnsAnInt,).
+// Else, put an extra comma AND then type list: METHOD(MyClass, int, someMethodThatTakesTwoFloatsAndReturnsAnInt, ,float, float)
 #define METHOD(__class, __in, __name, ...) \
     __in (*__name)(struct __class * __VA_ARGS__);
 #define ENDCLASS(__class)\
@@ -71,16 +86,16 @@ typedef struct __class {
 #undef ENDCLASS
 
 
-// Third pass, declare and define constructor with automatic initialization with provided values.
+// Third pass, declare and define constructor with automatic initialization with provided expressions/code blocks. The constructor is named new_className
 #define CLASS(__class)\
 WEAK_LINKAGE __class *new_##__class (void) { \
     __class *self = malloc(sizeof(__class));
-#define MEMBER(__type, __name, __type2, ...)\
-    self->__name = (__type __type2) __VA_ARGS__;
+#define MEMBER(__type, __name, ...)\
+    self->__name = (__type) __VA_ARGS__;
 #define MEMBERC(__type, __name, __type2, ...)\
     __VA_ARGS__;
-#define MEMBER_CLEANUP(__type, __name, __type2, __init, ...)\
-    self->__name = (__type __type2) __init;
+#define MEMBER_CLEANUP(__type, __name, __init, ...)\
+    self->__name = (__type) __init;
 #define MEMBERC_CLEANUP(__type, __name, __type2, __init, ...)\
     __init;
 #define METHOD(__class, __in, __name, ...)\
@@ -101,12 +116,12 @@ WEAK_LINKAGE __class *new_##__class (void) { \
 
 
 
-// Fourth pass, declare and define destructor with automatic cleanup with provided expressions.
+// Fourth pass, declare and define destructor with automatic cleanup with provided code blocks. The destructor is named delete_className
 #define CLASS(__class)\
 WEAK_LINKAGE void delete_##__class (__class *self) {
 #define MEMBER(...)
 #define MEMBERC(...)
-#define MEMBER_CLEANUP(__type, __name, __type2, __init, ...)\
+#define MEMBER_CLEANUP(__type, __name, __init, ...)\
     __VA_ARGS__;
 #define MEMBERC_CLEANUP(__type, __name, __type2, __init, ...)\
     __VA_ARGS__;
