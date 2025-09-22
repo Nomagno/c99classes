@@ -4,7 +4,8 @@
 // The CLASS macro framework allows to the define a class
 // It provides implicit constructors and methods with dynamic dispatch, but no inheritance/polymorphism.
 
-// The class.h header must be used when defining a class, and the __CLASS_FILE__ macro must be defined to match the header filename.
+// At the end of a class header, the endclass.h header must be used.
+ // When including multiple classes each class include must be within its own #ifdef __CLASS_H
 
 // When including multiple classes the reclass.h header must be included after each class include,
 // Each class include must be within its own __CLASS_H guard.
@@ -150,5 +151,7 @@ WEAK_LINKAGE void delete_##__class (__class *self) {
 #define MEMBERC_CLEANUP(...)
 #define METHOD(...)
 #define ENDCLASS(...)
+
+#undef __CLASS_H
 
 #endif

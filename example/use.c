@@ -1,5 +1,8 @@
 #include <stdio.h>
+
+#ifndef __CLASS_H
 #include "rotary.h"
+#endif
 
 int main(void) {
     Rotary *myrotary = new_Rotary();
