@@ -7,6 +7,7 @@
 #undef MEMBER_CLEANUP
 #undef MEMBERC_CLEANUP
 #undef METHOD
+#undef METHOD_STATIC
 #undef ENDCLASS
 #undef __CLASS_H
 #undef __CLASS_FILE__
