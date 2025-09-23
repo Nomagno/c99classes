@@ -151,6 +151,16 @@ WEAK_LINKAGE void delete_##__class (__class *self) {
 
 
 
+// This is a two-pass extension part of the multi-pass class.h process that ONLY works
+// for classes that don't depend on any other classes AND are not included by any other classes.
+// It generates explicit constructors.
+// Add #define __CLASS_INDEPENDENT
+// right before the include of class.h in the template seen in classtemplate.h to enable generating an explicit constructor that takes one argument for each non-custom-init parameter.
+#ifdef __CLASS_INDEPENDENT
+#include "class_explicit_constructor.h"
+#undef __CLASS_INDEPENDENT
+#endif
+
 #define CLASS(...)
 #define MEMBER(...)
 #define MEMBERC(...)
