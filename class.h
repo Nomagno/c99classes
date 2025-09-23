@@ -3,13 +3,10 @@
 
 // The CLASS macro framework allows to the define a class
 // It provides implicit constructors and methods with dynamic dispatch, but no inheritance/polymorphism.
-// See the classtemplate.h file for how to structure a class header such that it behaves transpatently
 
-// When including multiple classes the reclass.h header must be included after each class include,
-// Each class include must be within its own __CLASS_H guard.
-// See: example/rotary.h
+// Each class header file must follow the classtemplate.h template to behave nicely and transparently.
 
-// See the files in the example/ folder for a full example.
+// See the files in the example/ folder for a full example, specially rotary.h, box.h and light.h for the syntax.
 
 // Only non-standard thing, for the auto-generated constructor to not resutt, but almost all compilers have a way to do it
 #define WEAK_LINKAGE __attribute__((weak))
