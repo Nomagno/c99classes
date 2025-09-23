@@ -3,9 +3,7 @@
 
 // The CLASS macro framework allows to the define a class
 // It provides implicit constructors and methods with dynamic dispatch, but no inheritance/polymorphism.
-
-// At the end of a class header, the endclass.h header must be used.
- // When including multiple classes each class include must be within its own #ifdef __CLASS_H
+// See the classtemplate.h file for how to structure a class header such that it behaves transpatently
 
 // When including multiple classes the reclass.h header must be included after each class include,
 // Each class include must be within its own __CLASS_H guard.

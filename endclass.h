@@ -1,5 +1,6 @@
 #ifndef __CLASS_H
 // Just used to clean up after declaring a class to play nice with modularity principles.
+// See classtemplate.h for proper usage
 #undef CLASS
 #undef MEMBER
 #undef MEMBERC

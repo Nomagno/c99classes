@@ -1,14 +1,10 @@
-#ifndef __CLASS_H
-#include "light.h"
-#endif
-
-#ifndef __CLASS_H
-#include "box.h"
-#endif
-
-// __CLASS_FILE__ path is relative to class.h itself
+#if !defined(__CLASS_H) && !defined(__ROTARY_H)
 #define __CLASS_FILE__ "example/rotary.h"
 #include "../class.h"
+#elif defined(__CLASS_H)
+
+#include "light.h"
+#include "box.h"
 
 // A rotary input, with a position, and an indicator light.
 // The indicator light will be ON when the position is nonzero, and off when the position is 0.
@@ -24,4 +20,6 @@ CLASS(Rotary)
     METHOD(Rotary, void, moveWheel, ,int)
 ENDCLASS(Rotary)
 
+#define __ROTARY_H
+#endif
 #include "../endclass.h"
