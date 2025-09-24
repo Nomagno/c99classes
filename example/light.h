@@ -8,10 +8,14 @@
 #elif defined(__CLASS_H)
 
 // A light that can have intensity zero (OFF) or nonzero (ON)
+#ifndef __CLASS_INHERIT
 CLASS(Light)
+#endif
     MEMBER(unsigned, state, {0})
     METHOD(Light, void, setState, ,int)
+#ifndef __CLASS_INHERIT
 ENDCLASS(Light)
+#endif
 
 #define __LIGHT_H
 #endif
