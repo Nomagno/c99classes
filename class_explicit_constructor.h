@@ -1,8 +1,9 @@
-// This is a two-pass extension part of the multi-pass class.h process that ONLY works
-// for classes that don't depend on any other classes AND are not included by any other classes.
+// This is a two-pass extension part of the multi-pass class.h process.
 // It generates explicit constructors.
-// Add #define __CLASS_INDEPENDENT
-// right before the include of class.h in the template seen in classtemplate.h to enable generating an explicit constructor that takes one argument for each non-custom-init parameter.
+// Add #define __CLASS_EXPLICIT_CONSTRUCTOR
+//   right before the include of class.h in the template seen in classtemplate.h
+//   to enable generating an explicit constructor that takes one argument for each non-custom-init parameter.
+//   you can also force a class to be included with an explicit constructor by defining it right before including
 
 // Fifth pass, start constructor with parametrized initialization with provided expressions for non-custom members. The constructor is named new_className_explicit
 // Start function and parameter list

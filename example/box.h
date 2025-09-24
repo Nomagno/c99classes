@@ -1,4 +1,7 @@
 #if !defined(__CLASS_H) && !defined(__BOX_H)
+
+// Your includes here
+
 #define __CLASS_FILE__ "example/box.h"
 #include "../class.h"
 #elif defined(__CLASS_H)

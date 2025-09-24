@@ -1,4 +1,8 @@
 #if !defined(__CLASS_H) && !defined(__LIGHT_H)
+
+// Your includes here
+
+#define __CLASS_EXPLICIT_CONSTRUCTOR
 #define __CLASS_FILE__ "example/light.h"
 #include "../class.h"
 #elif defined(__CLASS_H)
