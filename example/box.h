@@ -12,10 +12,10 @@
 CLASS(Box)
 #endif
     MEMBER(int, value, 0)
-    METHOD(Box, void, setValue, ,int)
-    METHOD(Box, int, getValue,)
+    METHOD(Box, void, setValue, int)
+    METHOD(Box, int, getValue)
     METHOD_STATIC(Box, int, addOne, int)
-    METHOD_STATIC(Box, int, getSomeConstant, void)
+    METHOD_STATIC(Box, int, getSomeConstant)
 #ifndef __CLASS_INHERIT
 ENDCLASS(Box)
 #endif

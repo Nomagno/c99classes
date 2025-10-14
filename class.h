@@ -1,6 +1,11 @@
 #ifndef __CLASS_H
 #define __CLASS_H
 
+#define VALUE_IFNOT_TEST(...) __VA_ARGS__
+#define VALUE_IFNOT_TEST1(...)
+#define VALUE_IFNOT(COND, ...) VALUE_IFNOT_TEST ## COND ( __VA_ARGS__ )
+#define __VA_ALT__(__x, ...) VALUE_IFNOT(__VA_OPT__(1), __x) __VA_ARGS__
+
 // The CLASS macro framework allows to the define a class
 // It provides implicit constructors and methods with dynamic dispatch, but no inheritance/polymorphism.
 
@@ -46,10 +51,10 @@ typedef struct __class {
 // If it just takes self, just leave the trailing comma: METHOD(MyClass, int, someMethodThatJustReturnsAnInt,).
 // Else, put an extra comma AND then type list: METHOD(MyClass, int, someMethodThatTakesTwoFloatsAndReturnsAnInt, ,float, float)
 #define METHOD(__class, __in, __name, ...) \
-    __in (*__name)(struct __class * __VA_ARGS__);
+    __in (*__name)(struct __class * __VA_OPT__(,) __VA_ARGS__);
 // Same as METHOD, but without the implicit self. No trailing/added comma required, just put either void or the parameter list at the end.
 #define METHOD_STATIC(__class, __in, __name, ...) \
-    __in (*__name)(__VA_ARGS__);
+    __in (*__name)(__VA_ALT__(void, __VA_ARGS__));
 #define ENDCLASS(__class)\
 } __class;
 
@@ -72,9 +77,9 @@ typedef struct __class {
 #define MEMBER_CLEANUP(...)
 #define MEMBERC_CLEANUP(...)
 #define METHOD(__class, __in, __name, ...)\
-    __in method_##__class##_##__name(__class *self __VA_ARGS__);
+    __in method_##__class##_##__name(__class *self __VA_OPT__(,) __VA_ARGS__);
 #define METHOD_STATIC(__class, __in, __name, ...)\
-    __in method_##__class##_##__name(__VA_ARGS__);
+    __in method_##__class##_##__name(__VA_ALT__(void, __VA_ARGS__));
 #define ENDCLASS(...)
 
 #include __CLASS_FILE__

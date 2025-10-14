@@ -12,7 +12,7 @@
 CLASS(Light)
 #endif
     MEMBER(unsigned, state, {0})
-    METHOD(Light, void, setState, ,int)
+    METHOD(Light, void, setState, int)
 #ifndef __CLASS_INHERIT
 ENDCLASS(Light)
 #endif

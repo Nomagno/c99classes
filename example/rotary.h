@@ -24,7 +24,7 @@ CLASS(Rotary)
         for(int i = 0; i < 12; i++) {
             self->data[i] = 0;
         })
-    METHOD(Rotary, void, moveWheel, ,int)
+    METHOD(Rotary, void, moveWheel, int)
 #ifndef __CLASS_INHERIT
 ENDCLASS(Rotary)
 #endif
