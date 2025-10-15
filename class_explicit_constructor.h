@@ -9,10 +9,8 @@
 // Start function and parameter list
 #define CLASS(__class)\
 WEAK_LINKAGE __class *new_##__class##_explicit (
-#define MEMBER(__type, __name, ...) __type __name,
+#define MEMBER(__type, __name, __init, ...) __type __name,
 #define MEMBERC(...)
-#define MEMBER_CLEANUP(__type, __name, __init, ...) __type __name,
-#define MEMBERC_CLEANUP(...)
 #define METHOD(...)
 #define METHOD_STATIC(...)
 // Close parameter list, making it variadic is a HUGE hack but you gotta do what you gotta do
@@ -23,8 +21,6 @@ WEAK_LINKAGE __class *new_##__class##_explicit (
 #undef CLASS
 #undef MEMBER
 #undef MEMBERC
-#undef MEMBER_CLEANUP
-#undef MEMBERC_CLEANUP
 #undef METHOD
 #undef METHOD_STATIC
 #undef ENDCLASS
@@ -34,14 +30,10 @@ WEAK_LINKAGE __class *new_##__class##_explicit (
 // Sixth pass, finish constructor with parametrized initialization with provided expressions for non-custom init members. The constructor is named new_className_explicit
 #define CLASS(__class) { \
     __class *self = malloc(sizeof(__class));
-#define MEMBER(__type, __name, ...)\
+#define MEMBER(__type, __name, __init, ...) \
     self->__name = __name;
-#define MEMBERC(__type, __name, __type2, ...)\
+#define MEMBERC(__type, __name, __type2, __init, ...) \
     __VA_ARGS__;
-#define MEMBER_CLEANUP(__type, __name, __init, ...)\
-    self->__name = __init;
-#define MEMBERC_CLEANUP(__type, __name, __type2, __init, ...)\
-    __init;
 #define METHOD(__class, __in, __name, ...)\
     self->__name = &method_##__class##_##__name;
 #define METHOD_STATIC(__class, __in, __name, ...)\
@@ -55,8 +47,6 @@ WEAK_LINKAGE __class *new_##__class##_explicit (
 #undef CLASS
 #undef MEMBER
 #undef MEMBERC
-#undef MEMBER_CLEANUP
-#undef MEMBERC_CLEANUP
 #undef METHOD
 #undef METHOD_STATIC
 #undef ENDCLASS

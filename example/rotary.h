@@ -17,13 +17,10 @@ CLASS(Rotary)
 #endif
     #define __PARENT "example/light.h"
     #include "../inherit.h"
-    MEMBER_CLEANUP(Box *, some_unused_box, new_Box(), delete_Box(self->some_unused_box))
-    MEMBER_CLEANUP(Light *, indicator, new_Light_explicit(1), delete_Light(self->indicator))
+    MEMBER(Box *, some_unused_box, new_Box(), delete_Box(self->some_unused_box))
+    MEMBER(Light *, indicator, new_Light_explicit(1), delete_Light(self->indicator))
     MEMBER(int, wheelpos, {0})
-    MEMBERC(int, data,[12],
-        for(int i = 0; i < 12; i++) {
-            self->data[i] = 0;
-        })
+    MEMBERC(int, data,[12],  BLOCK(for(int i = 0; i < 12; i++){ self->data[i] = 0; }) )
     METHOD(Rotary, void, moveWheel, int)
 #ifndef __CLASS_INHERIT
 ENDCLASS(Rotary)

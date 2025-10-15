@@ -4,11 +4,11 @@
 #undef CLASS
 #undef MEMBER
 #undef MEMBERC
-#undef MEMBER_CLEANUP
-#undef MEMBERC_CLEANUP
 #undef METHOD
 #undef METHOD_STATIC
 #undef ENDCLASS
+#undef PAREN
+#undef BLOCK
 #undef __CLASS_H
 #undef __CLASS_FILE__
 #endif
