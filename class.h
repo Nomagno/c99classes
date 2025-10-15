@@ -8,6 +8,22 @@
 #define PAREN(...) __VA_ARGS__
 #define BLOCK(...) {__VA_ARGS__}
 
+// The inheritance branch has improved ergonomics and inheritance, at the cost of:
+// - It requires __VA_OPT__, which is only available in C23 rather than C99
+// - rather than the master branch approach,
+//      CLASS(MyClass) 
+//          ...
+//      ENDCLASS(MyClass)
+//  the following variation must ALWAYS be used to make inheritance play nice:
+//      #ifndef __CLASS_INHERIT
+//      CLASS(MyClass) 
+//      #endif
+//          ...
+//      #ifndef __CLASS_INHERIT
+//      ENDCLASS(MyClass) 
+//      #endif
+//   I'm open to any suggestions to eliminate the need for this.
+
 // The CLASS macro framework allows to the define a class
 // It provides implicit constructors and methods with dynamic dispatch, but no inheritance/polymorphism.
 
