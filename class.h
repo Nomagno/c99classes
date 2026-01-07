@@ -34,6 +34,7 @@ If _x_ is not empty, produces _y_, else produces _z_. Do not use or redefine beg
 #define ESC_(...) VAN ## __VA_ARGS__
 #define VANISH
 
+#define MT(__inst, __method, __args) __inst->__method(__inst IF_VALUE(DEPAREN(__args))(,)() DEPAREN(__args))
 
 // The inheritance branch has improved ergonomics and inheritance, at the cost of:
 // - It requires __VA_OPT__, which is only available in C23 rather than C99
@@ -129,7 +130,7 @@ typedef struct __class {
 #define STARTUP(...) __VA_ARGS__
 #define CLEANUP(...)
 #define CLASS(__class)\
-static inline __class *new_##__class (void) { \
+static inline __class *new_##__class (void *ptr, ...) { \
     __class *self = malloc(sizeof(__class));
 #define MEMBER(__type, __name, __type2, __init, ...) \
     self->__name __init;

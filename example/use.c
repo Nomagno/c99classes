@@ -3,14 +3,14 @@
 #include "light.h"
 
 int main(void) {
-    Rotary *myrotary = new_Rotary();
+    Rotary *myrotary = new_Rotary(0);
 
     printf("LIGHT %s, POS %d\n", myrotary->state ? "ON" : "OFF", myrotary->wheelpos);
-    myrotary->moveWheel(myrotary, 4);
+    MT(myrotary, moveWheel,(4));
     printf("LIGHT %s, POS %d\n", myrotary->state ? "ON" : "OFF", myrotary->wheelpos);
-    myrotary->moveWheel(myrotary, -4);
+    MT(myrotary, moveWheel,(-4));
     printf("LIGHT %s, POS %d\n", myrotary->state ? "ON" : "OFF", myrotary->wheelpos);
-    myrotary->moveWheel(myrotary, -3);
+    MT(myrotary, moveWheel,(-3));
     printf("LIGHT %s, POS %d\n", myrotary->state ? "ON" : "OFF", myrotary->wheelpos);
 
     delete_Rotary(myrotary);

@@ -23,7 +23,7 @@ CLASS(Rotary)
 #endif
     #define __PARENT "example/light.h"
     #include "../inherit.h"
-    MEMBER(Box *, some_unused_box,, =new_Box(), delete_Box(self->some_unused_box))
+    MEMBER(Box *, some_unused_box,, =new_Box(0), delete_Box(self->some_unused_box))
     MEMBER(int, wheelpos,, =0)
     MEMBER(int, data,[12], ; BLOCK(for(int i = 0; i < 12; i++){ self->data[i] = 0; }) )
     METHOD(Rotary, void, moveWheel, int a,
